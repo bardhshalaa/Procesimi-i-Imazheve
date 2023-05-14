@@ -1,0 +1,28 @@
+% Imazhi me fqinjësi 8
+img = imread('mri.jpg');
+% Inicializo fqinjësinë 4
+four_path = zeros(size(img));
+% Ndryshoje fqinjësinë 8
+for i = 2:size(img, 1)-1
+  for j = 2:size(img, 2)-1
+    % Nëse pikseli aktual është në kënd, shtoje atë
+    if img(i,j) == 1 && sum(sum(img(i-1:i+1,j-1:j+1))) == 3
+      four_path(i,j) = 1;
+    % Nëse pikseli aktual është në vijë të drejtë, kontrolloje pikselin paraprak dhe atë të ardhshëm
+    elseif img(i,j) == 1 && sum(sum(img(i-1:i+1,j-1:j+1))) == 2
+      % Kontrolloje pikselin paraprak
+      if img(i-1,j-1) == 1 || img(i+1,j-1) == 1
+        % Kontrolloje pikselin e ardhshëm
+        if img(i-1,j+1) == 1 || img(i+1,j+1) == 1
+          % Kapërceje pikselin aktual
+          continue
+        end
+      end
+      % Shtoje pikselin aktual në fqinjësinë 4
+      four_path(i,j) = 1;
+    end
+  end
+end
+% Shfaqi rezultatet
+subplot(1,2,1), imshow(img), title('8-Path')
+subplot(1,2,2), imshow(four_path), title('4-Path')

@@ -1,0 +1,19 @@
+%Demonstrimi i zhurmes Rayleigh
+I=imread('test.tif');
+N2=zhurma(I,'Rayleigh',0,0,248,246,1,0.2,150);
+
+%Demonstrimi i zhurmes Eksponenciale
+I=imread('test.tif');
+N2=zhurma(I,'Eksponenciale',0,0,248,246,1,0.1,0.2);
+
+%Demonstrimi i zhurmes LogNormal
+I=imread('test.tif');
+N2=zhurma(I,'LogNormal',0,0,248,246,1,1,2);
+
+%Demonstrimi i zhurmes Salt&Pepper
+I=imread('test.tif');
+N2=zhurma(I,'Salt&Pepper',0,0,248,246,1,0.05,0.95);
+
+%Demonstrimi i zhurmes Erlang
+I=imread('test.tif');
+N2=zhurma(I,'Erlang',0,0,248,246,1,0.05,0.95);

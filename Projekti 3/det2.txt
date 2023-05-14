@@ -1,0 +1,37 @@
+
+%Leximi i imazhit dhe shtimi manual i zhurmes
+img = imread('lena.tif');
+img_noise = add_noise(img);
+
+%Transformimet Furie
+FTB1 = fft2(img_noise);
+FTB1SH = fftshift(FTB1);
+mesh(log(abs(FTB1SH)));
+imshow(uint8(sqrt(abs(FTB1SH))));
+
+
+%Krijimi i filtereve per secilen nga pikat/vijat e nevojshme
+F1=G(img,46,3);
+F2=line_filter(img,'v',111);
+F3=line_filter(img,'v',113);
+F4=line_filter(img,'h',85);
+F5=line_filter(img,'v',145);
+F6=line_filter(img,'v',147);
+F7=line_filter(img,'h',172);
+
+%Bashkimi i te gjithe filterave ne nje
+F=F1.*F2;
+F=F.*F3;
+F=F.*F4;
+F=F.*F5;
+F=F.*F6;
+F=F.*F7;
+imshow(F);
+
+
+%Aplikimi i filterit dhe transformimet inverse Furie
+C1=FTB1SH.*F;
+C2=ifftshift(C1);
+C3=ifft2(C2);
+imshow(uint8(abs(C3))),figure, imshow(img_noise);
+

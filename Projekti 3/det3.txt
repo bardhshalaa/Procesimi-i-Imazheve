@@ -1,0 +1,13 @@
+pkg load image
+
+% Load the image
+img = imread('lena.tif');
+
+u0=30;
+v0=5;
+
+Hg = Hg_filter(img, u0, v0);
+mesh(Hg);
+imshow(Hg);
+
+
